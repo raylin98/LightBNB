@@ -78,7 +78,7 @@ const addUser = (user) => {
 
 const getAllReservations = (guest_id, limit = 10) => {
 	return pool
-	.query(`SELECT reservations.*, properties.*, avg(property_reviews.rating)
+	.query(`SELECT reservations.*, properties.*, AVG(rating) as average_rating
 	FROM reservations
 	JOIN properties ON reservations.property_id = properties.id
 	JOIN property_reviews ON properties.id = property_reviews.property_id
@@ -115,7 +115,7 @@ const getAllProperties = function (options, limit = 10) {
   
 	if (options.owner_id) {
 	  queryParams.push(options.owner_id);
-	  queryString += `AND owner_id = $${queryParams.length}`;
+	  queryString += `AND owner_id = $${queryParams.length} `;
 	}
 
 	if (options.city) {
@@ -128,7 +128,7 @@ const getAllProperties = function (options, limit = 10) {
 		queryString += `AND cost_per_night >= $${queryParams.length - 1} AND cost_per_night <= $${queryParams.length}`
 	}
   
-	queryString += `GROUP BY properties.id`;
+	queryString += `GROUP BY properties.id `;
 
   if (options.minimum_rating) {
     queryParams.push(options.minimum_rating);
@@ -179,7 +179,7 @@ const addProperty = function(property) {
     RETURNING *;`, queryParams
   )
   .then((result) => {
-    return result.rows;
+    return result.rows[0];
   })
   .catch((err) => {
     console.log(err.message)
