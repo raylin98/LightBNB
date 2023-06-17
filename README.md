@@ -2,6 +2,17 @@
 A simple multi-page Airbnb clone that uses a server-side Javascript to display the information form queries to web pages via SQL queries.
 
 This application was forked from [lighthouse-labs/LightBnB_WebApp](https://github.com/lighthouse-labs/LightBnB_WebApp).
+
+## Installation
+Install the LightBnB_WebApp `npm install` to install all dependecies. Once installed, run it `npm run local` and view the page at `localhost:3000` 
+
+## Login
+To use the app, you can use a pre-existing account.
+
+Username: "trisanjacobs@gmail.com"
+
+Password: "password"
+
 ## Project Structure
 
 ```
